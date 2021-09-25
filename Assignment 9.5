@@ -1,0 +1,18 @@
+name = input("Enter file:")
+if len(name) < 1:
+    name = "mbox-short.txt"
+handle = open(name)
+counts = dict()// dictionary for storing email as key and no of appreances as value
+word=[]
+for line in handle:
+    line.rstrip()
+    if line.startswith('From '):
+        word=line.split()
+        counts[word[1]] = counts.get(word[1],0) + 1
+bigcount = None
+bigword = None
+for word,count in counts.items():
+    if bigcount is None or count > bigcount:
+        bigword = word
+        bigcount = count
+print(bigword, bigcount)
